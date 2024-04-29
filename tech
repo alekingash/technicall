@@ -1,0 +1,74 @@
+import 'dart:io';
+
+// Define a parent class
+class Animal {
+  String name;
+
+  Animal(this.name);
+
+  void makeSound() {
+    print('Animal makes a sound');
+  }
+}
+
+// Define a child class that inherits from Animal
+class Dog extends Animal {
+  Dog(String name) : super(name);
+
+  // Override the makeSound method
+  @override
+  void makeSound() {
+    print('$name barks');
+  }
+}
+
+// Define an interface
+abstract class Printable {
+  void printInfo();
+}
+
+// Implement the interface in a class
+class Book implements Printable {
+  String title;
+
+  Book(this.title);
+
+  @override
+  void printInfo() {
+    print('Book title: $title');
+  }
+}
+
+// Method to initialize an instance with data from a file
+void initializeFromDataFile() {
+  final file = File('data.txt');
+  final lines = file.readAsLinesSync();
+  for (var line in lines) {
+    final parts = line.split(',');
+    final name = parts[0];
+    final sound = parts[1];
+
+    final animal = Animal(name);
+    animal.makeSound(); // Output: Animal makes a sound
+
+    final dog = Dog(name);
+    dog.makeSound(); // Output: Dog barks
+
+    final book = Book(name);
+    book.printInfo(); // Output: Book title: <name from file>
+  }
+}
+
+// Method to demonstrate the use of a loop
+void loopExample() {
+  final List<String> names = ['Alice', 'Bob', 'Charlie'];
+
+  for (var name in names) {
+    print('Hello, $name!');
+  }
+}
+
+void main() {
+  initializeFromDataFile();
+  loopExample();
+}
